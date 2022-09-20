@@ -55,7 +55,7 @@ class Sea(TileWithASign):
 class UTile(TileWithASign):
     def __init__(self, tile: TileWithASign):
         self.tile = tile
-        super().__init__('U(' + self.tile.sign + ')', img='unknown.png')
+        super().__init__('U(' + self.tile.sign + ')', img='utile.png')
 
     def get_tile(self):
         return self.tile
