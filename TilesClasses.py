@@ -34,6 +34,8 @@ class Tile(pygame.sprite.Sprite):
             self.image = pygame.Surface((76, 76))
             self.image.fill(pygame.color.Color(0, 255, 0))
         self.rect = self.image.get_rect()
+        self.people = []
+        self.money = 0
 
 
 class TileWithASign(Tile):
@@ -75,61 +77,62 @@ class Opushka(TileWithSkins):
         super().__init__(skin, 1, 4, 'O', imgs=['opushka.png', 'opushka2.png', 'opushka3.png', 'opushka4.png'])
 
 
-class Arrow(Tile):
-    def __init__(self, side: int, int1: int):
+class Arrow(TileWithASign):
+    def __init__(self, side: int, int1: int, sign: str, img=''):
         if side not in range(1, int1 + 1):
             raise TileSideNotExist
         self.side = side
+        super().__init__('A' + sign)
+        if img != '':
+            self.image = pygame.transform.scale(load_image(img), (76, 76))
+            self.image = pygame.transform.rotate(self.image, (side - 1) * 90)
+        else:
+            self.image = pygame.Surface((76, 76))
+            self.image.fill(pygame.color.Color(0, 255, 0))
+        self.rect = self.image.get_rect()
 
     def get_side(self):
         return self.side
 
 
-class Arrow1S(Arrow, TileWithASign):
+class Arrow1S(Arrow):
     def __init__(self, side):
-        Arrow.__init__(self, side, 4)
-        TileWithASign.__init__(self, "A1S")
+        super().__init__(side, 4, '1S', 'a1s.png')
 
 
-class Arrow1D(Arrow, TileWithASign):
+class Arrow1D(Arrow):
     def __init__(self, side):
-        Arrow.__init__(self, side, 4)
-        TileWithASign.__init__(self, 'A1D')
+        super().__init__(side, 4, '1D', 'a1d.png')
 
 
-class Arrow2D(Arrow, TileWithASign):
+class Arrow2D(Arrow):
     def __init__(self, side):
-        Arrow.__init__(self, side, 4)
-        TileWithASign.__init__(self, 'A2D')
+        super().__init__(side, 4, '2D', 'a2d.png')
 
 
-class Arrow2S(Arrow, TileWithASign):
+class Arrow2S(Arrow):
     def __init__(self, side):
-        Arrow.__init__(self, side, 4)
-        TileWithASign.__init__(self, 'A2S')
+        super().__init__(side, 4, '2S', 'a2s.png')
 
 
-class Arrow3(Arrow, TileWithASign):
+class Arrow3(Arrow):
     def __init__(self, side):
-        Arrow.__init__(self, side, 4)
-        TileWithASign.__init__(self, 'A3')
+        super().__init__(side, 4, '3', 'a3.png')
 
 
-class Arrow4D(Arrow, TileWithASign):
+class Arrow4D(Arrow):
     def __init__(self, side):
-        Arrow.__init__(self, side, 1)
-        TileWithASign.__init__(self, 'A4D')
+        super().__init__(side, 1, '4D', 'a4d.png')
 
 
-class Arrow4S(Arrow, TileWithASign):
+class Arrow4S(Arrow):
     def __init__(self, side):
-        Arrow.__init__(self, side, 1)
-        TileWithASign.__init__(self, 'A4S')
+        super().__init__(side, 1, '4S', 'a4s.png')
 
 
 class Horse(TileWithASign):
     def __init__(self):
-        super().__init__('H')
+        super().__init__('H', 'horse.png')
 
 
 class StepTile(TileWithASign):

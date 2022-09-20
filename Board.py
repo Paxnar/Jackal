@@ -16,7 +16,7 @@ class Board:
             for o in range(len(self.board)):
                 for p in range(len(self.board[o])):
                     if self.board[o][p] == 0:
-                        ch = random.choice(possible_tiles)
+                        ch = possible_tiles[0]
                         possible_tiles.remove(ch)
                         self.board[o][p] = UTile(ch)
 

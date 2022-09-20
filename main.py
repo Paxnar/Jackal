@@ -1,7 +1,3 @@
-import os
-import sys
-import pygame
-import random
 from Board import Board
 from TilesClasses import *
 running = True
@@ -13,9 +9,10 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode(size)
     pygame.display.flip()
     all_sprites = pygame.sprite.Group()
-    # ожидание закрытия окна:
+
     board = Board(0)
     board.show_board_like_list()
+
     for row in range(len(board.board)):
         for col in range(len(board.board[row])):
             board.board[row][col].rect.x = 76 * col
